@@ -67,8 +67,8 @@ class ViewController: UIViewController ,AVCaptureMetadataOutputObjectsDelegate {
         self.session.sessionPreset = AVCaptureSessionPresetHigh
         var error : NSError?
         let input = AVCaptureDeviceInput(device: device, error: &error)
-        if error {
-            println(error.description)
+        if (error != nil) {
+            println(error?.description)
             return
         }
         if session.canAddInput(input) {
@@ -88,7 +88,7 @@ class ViewController: UIViewController ,AVCaptureMetadataOutputObjectsDelegate {
         session.startRunning()
     }
     
-    func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: AnyObject[]!, fromConnection connection: AVCaptureConnection!){
+    func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!){
         var stringValue:String?
         if metadataObjects.count > 0 {
             var metadataObject = metadataObjects[0] as AVMetadataMachineReadableCodeObject
